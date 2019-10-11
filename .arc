@@ -5,6 +5,7 @@ wonder-p3m
 
 @http
 get /
+get /api
 
 @tables
 data
