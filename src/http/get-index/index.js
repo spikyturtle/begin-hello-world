@@ -4,8 +4,33 @@
 // Add secure sessions, middleware, and more: https://docs.begin.com/en/functions/http/
 // let arc = require('@architect/functions')
 
+const { Pool } = require('pg')
+
+let pgPool
+
+function createPool() {
+  console.log("Create pool")
+  pgPool = new Pool()
+}
 
 exports.handler = async function http(req, context) {
+
+  if( !pgPool )
+  {
+    createPool()
+  }
+
+  console.log("pgPool connect")
+
+  // Fetch a postgres client from the pool
+  const pgClient = await pgPool.connect()
+
+  console.log('pgClient connected')
+
+  pgClient.release()
+
+  console.log('pgClient released')
+
   return {
     headers: {'content-type': 'application/json; charset=utf8'},
     body: JSON.stringify(context)
