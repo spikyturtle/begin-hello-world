@@ -29,10 +29,10 @@ let body = `
 </html>
 `
 
-exports.handler = async function http(req) {
+exports.handler = async function http(req, context) {
   return {
-    headers: {'content-type': 'text/html; charset=utf8'},
-    body
+    headers: {'content-type': 'application/json; charset=utf8'},
+    body: JSON.stringify(context)
   }
 }
 
