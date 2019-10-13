@@ -4,6 +4,7 @@
 // Add secure sessions, middleware, and more: https://docs.begin.com/en/functions/http/
 // let arc = require('@architect/functions')
 
+
 const { Pool } = require('pg')
 
 let pgPool
