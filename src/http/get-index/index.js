@@ -35,7 +35,13 @@ exports.handler = async function http(req, context) {
   // Pretend to do a little work
   await new Promise(done => setTimeout(done, 2000))
 
-  pgClient.release()
+  if( process.env.NODE_ENV == "testing" ) {
+    pgClient.release(true)
+  }
+  else {
+    pgClient.release()
+  }
+
 
   console.log('pgClient released')
 
