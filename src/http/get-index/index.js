@@ -9,7 +9,7 @@ const { Pool } = require('pg')
 let pgPool
 
 function createPool() {
-  console.log("Create pool")
+  console.log("Initialise pool")
   pgPool = new Pool()
 }
 
@@ -19,6 +19,10 @@ exports.handler = async function http(req, context) {
   {
     createPool()
   }
+  else
+  {
+    console.log("Reuse existing pool")
+  }
 
   console.log("pgPool connect")
 
@@ -26,6 +30,9 @@ exports.handler = async function http(req, context) {
   const pgClient = await pgPool.connect()
 
   console.log('pgClient connected')
+
+  // Pretend to do a little work
+  await new Promise(done => setTimeout(done, 2000))
 
   pgClient.release()
 
