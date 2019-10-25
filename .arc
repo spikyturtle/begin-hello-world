@@ -9,6 +9,9 @@ get /api
 post /api
 post /fresh-api
 
+@scheduled
+test_schedule rate (1 hour)
+
 @tables
 data
   scopeID *String
